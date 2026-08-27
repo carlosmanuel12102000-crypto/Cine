@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Vamos al cine?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a1a2e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      background: #16213e;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      width: 85%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    h1 { font-size: 1.8rem; margin-bottom: 20px; color: #e94560; }
+    p { font-size: 1.1rem; margin-bottom: 30px; }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      min-height: 60px;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #btn-si { background-color: #0f3460; color: #fff; }
+    #btn-si:hover { background-color: #e94560; transform: scale(1.1); }
+
+    #btn-no {
+      background-color: #533483;
+      color: #fff;
+      position: absolute;
+      right: 20px;
+    }
+
+    /* Animación de la escena de la moto */
+    #escena-final { display: none; }
+
+    .camino {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      border-bottom: 4px dashed #fff;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .moto {
+      position: absolute;
+      bottom: 5px;
+      left: -50px;
+      font-size: 2.5rem;
+      /* Aplica escala negativa en X para voltear el emoji hacia la derecha */
+      transform: scaleX(-1);
+      animation: conducir 4s forwards linear;
+    }
+
+    .casa {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      font-size: 3rem;
+    }
+
+    .corazon {
+      font-size: 2rem;
+      animation: latido 1s infinite alternate;
+      margin-top: 15px;
+    }
+
+    @keyframes conducir {
+      0% { left: -50px; transform: scaleX(-1); }
+      80% { left: 65%; transform: scaleX(-1); }
+      100% { left: 65%; transform: scaleX(-1); }
+    }
+
+    @keyframes latido {
+      from { transform: scale(1); }
+      to { transform: scale(1.3); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="pantalla-pregunta">
+    <h1>¿Cine hoy en la tarde? 🍿🎬</h1>
+    <p>Tengo el plan perfecto, ¿aceptas salir conmigo?</p>
+    <div class="btn-container">
+      <button id="btn-si" onclick="aceptarInvitacion()">¡Sí, me encanta! ❤️</button>
+      <button id="btn-no" onmouseover="moverBoton()" onclick="moverBoton()" ontouchstart="moverBoton()">No</button>
+    </div>
+  </div>
+
+  <div class="card" id="escena-final">
+    <h1>¡Sabía que dirías que sí! 🥰</h1>
+    <p>Paso a recogerte a las <b>3:00 PM</b> 🛵💨</p>
+    
+    <div class="camino">
+      <div class="moto">🛵</div>
+      <div class="casa">🏡</div>
+    </div>
+
+    <div class="corazon">💖</div>
+  </div>
+
+  <script>
+    function moverBoton() {
+      const btnNo = document.getElementById('btn-no');
+      const x = Math.random() * (window.innerWidth < 400 ? 140 : 180) - 90;
+      const y = Math.random() * 120 - 60;
+      
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function aceptarInvitacion() {
+      document.getElementById('pantalla-pregunta').style.display = 'none';
+      document.getElementById('escena-final').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
